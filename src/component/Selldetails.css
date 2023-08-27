@@ -1,0 +1,78 @@
+/* SellDetails.css */
+
+/* Container styling */
+.container {
+  padding: 20px;
+}
+
+/* Title styling */
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Book card styling */
+.book-card-selldetails {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f2f2f2 !important;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+}
+
+.book-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.book-description {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #777777;
+}
+
+.book-price {
+  font-size: 1.2rem;
+  color: #e91e63;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+.container-selldetails-box {
+  margin: 10px 0px !important;
+  padding: 10px 0px !important;
+}

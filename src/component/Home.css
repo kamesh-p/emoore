@@ -1,0 +1,281 @@
+.homepage {
+  overflow-y: auto;
+
+  padding: 0px 50px;
+}
+
+.category-container {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: row;
+
+  margin-top: 130px;
+
+  justify-content: space-between;
+}
+
+.category {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 140px;
+
+  min-height: 170px;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.categoryInner {
+  min-width: 130px;
+
+  width: 130px;
+
+  min-height: 160px;
+
+  height: 160px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  border-radius: 5px;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.categoryInner img {
+  width: 80px;
+  background-color: #ff90b2;
+}
+
+.categoryInner:hover {
+  box-shadow: 0px 0px 5px rgba(96, 96, 96, 0.436);
+}
+
+.carousel-container {
+  height: 400px;
+
+  display: flex;
+
+  padding: 0;
+
+  background-image: url(https://n2.sdlcdn.com/imgs/j/l/p/1300x410-d3863.jpg);
+
+  border-radius: 5px;
+}
+
+.trending-section {
+  border: 1px solid black;
+
+  padding: 15px 30px;
+
+  background-color: #444653;
+
+  color: white;
+
+  width: 250px;
+}
+
+.trending-section h4 {
+  text-align: start;
+}
+
+.trending-books {
+  display: flex;
+
+  height: 40px;
+
+  align-items: left;
+
+  padding-left: 10px;
+
+  border-radius: 3px;
+}
+
+.trending-books p {
+  position: relative;
+
+  top: 8px;
+
+  display: flex;
+
+  align-items: right;
+}
+
+.trending-books:hover {
+  background-color: #3c3d49;
+}
+
+.books-scroll-section {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 10px 20px 0 20px; /* TRBL */
+}
+
+.books-scroll-section-header {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.books-scroll-section button {
+  height: 40px;
+}
+
+/* ###################################### */
+
+.container {
+  margin: 0 auto;
+
+  max-width: 910px;
+}
+
+.choose {
+  width: 100%;
+
+  height: 40px;
+}
+
+.fa {
+  margin-right: 20px;
+
+  font-size: 30px;
+
+  color: gray;
+
+  float: right;
+}
+
+/******************************************
+
+  Book stuff
+
+  *******************************************/
+
+.book {
+  display: inline-block;
+
+  width: 230px;
+
+  height: 390px;
+
+  box-shadow: 0 0 20px #aaa;
+
+  margin: 25px;
+
+  padding: 10px 10px 0 10px;
+
+  vertical-align: top;
+
+  transition: height 1s;
+}
+
+.cover {
+  border: 2px solid gray;
+
+  height: 80%;
+
+  overflow: hidden;
+}
+
+.cover img {
+  width: 100%;
+}
+
+.book p {
+  margin-top: 12px;
+
+  font-size: 20px;
+}
+
+.book .author {
+  font-size: 15px;
+}
+
+@media (max-width: 941px) {
+  .container {
+    max-width: 700px;
+  }
+
+  .book {
+    margin: 49px;
+  }
+}
+
+@media (max-width: 730px) {
+  .book {
+    display: block;
+
+    margin: 0 auto;
+
+    margin-top: 50px;
+  }
+
+  .cover {
+  }
+}
+
+/*********************************
+
+  other
+
+  **********************************/
+
+h1 {
+  color: gray;
+
+  text-align: center;
+
+  font-size: 50px;
+
+  margin-bottom: -3px;
+}
+
+/**********************************
+
+  display change
+
+  ***********************************/
+
+/*book height smaller, cover opacity, move text onto cover  */
+
+#list-th:target .book {
+  height: 100px;
+
+  width: 250px;
+
+  padding: 10px;
+
+  margin: 25px auto 25px auto;
+}
+
+#list-th:target .cover {
+  width: 246px;
+}
+
+#list-th:target img {
+  opacity: 0.1;
+}
+
+#list-th:target p {
+  margin-top: -62px;
+
+  margin-left: 20px;
+}
+
+/* remove button? */
+
+#large-th:target .book {
+  height: 390px;
+}

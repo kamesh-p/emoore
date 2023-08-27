@@ -1,0 +1,57 @@
+/* Library.css */
+
+.library-container-library {
+  max-width: 1000px;
+  margin: auto;
+  padding: 24px;
+}
+
+.book-list-library {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+.book-item-library {
+  background-color: #f5f5f5;
+  padding: 30px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.book-image-library {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+}
+
+.book-details-library {
+  text-align: center;
+}
+
+.book-details-library h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.book-details-library p {
+  margin: 0;
+}
+
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+.rent-button-details {
+  display: flex !important;
+}
+.input-field {
+  margin: 10px 0px !important;
+}

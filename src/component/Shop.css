@@ -1,0 +1,140 @@
+.sidebar-Shop-sidebar {
+  background-color: #d4d4d4;
+  /* border: 1px solid black; */
+  padding: 20px;
+
+  width: 200px;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-Shop-sidebar h2 {
+  font-size: 1.5rem;
+
+  color: black;
+}
+
+.category-Shop-sidebar {
+  margin-bottom: 20px;
+  margin: 60px 0px;
+
+  color: black;
+}
+
+.category-Shop-sidebar h3 {
+  font-size: 1.2rem;
+
+  margin-bottom: 10px;
+}
+
+.category-Shop-sidebar ul {
+  list-style-type: none;
+
+  padding: 0;
+}
+
+.Shop-sidebar-li {
+  margin: 20px 0px;
+
+  cursor: pointer;
+
+  transition: color 0.3s;
+}
+
+.category-Shop-sidebar li:hover {
+  color: rgb(71, 71, 71);
+}
+.shop-slide-full-container {
+  display: flex;
+}
+.filtered-clasified-books {
+  display: flex;
+}
+.books-container-shop-comp {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 50px 0px 0px 180px;
+}
+
+/* Sidebar container */
+.shop-slide-full-container {
+  display: flex;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Sidebar heading */
+.sidebar-heading {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Sidebar categories */
+.Shop-sidebar-li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Sidebar category hover effect */
+.Shop-sidebar-li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Sidebar icon */
+.sidebar-icon {
+  margin-right: 10px;
+}
+
+/* Subcategory container */
+.category-Shop-sidebar {
+  margin-bottom: 20px;
+}
+
+/* Subcategory title */
+.category-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Subcategory items */
+.subcategory-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 14px;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Subcategory item hover effect */
+.subcategory-item:hover {
+  background-color: #f0f0f0;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+/*  */
+
+.drawer-full-contained {
+  z-index: 1 !important;
+}
+.typo-drawer {
+  margin-top: 70px !important;
+}
+.Card-indiv-book-search-shop {
+  height: 270px !important;
+  width: 200px !important;
+  margin: 50px 10px 10px 50px;
+  background-color: #f2f2f2 !important;
+}
+.link-shop-comp-contanin {
+  text-decoration: none !important;
+}

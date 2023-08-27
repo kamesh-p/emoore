@@ -1,0 +1,22 @@
+.container-drawer-dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* overflow: hidden; */
+  width: 10px;
+}
+.list-dashboard-container {
+  margin-top: 70px !important;
+}
+.top-list-componenet {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.tab-container {
+  padding: 0 20px;
+}
+.dashboard-content {
+  flex-grow: 1;
+  overflow: auto;
+}

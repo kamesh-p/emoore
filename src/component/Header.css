@@ -1,0 +1,62 @@
+.nav-div-class {
+  margin-left: 750px;
+}
+.nav-link {
+  color: rgb(245, 245, 245) !important;
+  margin: 0px 15px;
+}
+#container {
+  display: flex;
+}
+
+.Title-logo {
+  width: 100px;
+  color: rgb(245, 245, 245) !important;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.link-logo {
+  list-style: none !important;
+  color: rgb(245, 245, 245) !important;
+  text-decoration: none !important;
+}
+#btn-drop {
+  margin-top: 15px;
+}
+.Login-page {
+  color: black !important;
+  text-decoration: none !important;
+}
+#dropdown-menu-align-end {
+  /* margin-top: 13px !important; */
+  background-color: transparent !important;
+  border: 0px !important;
+  margin-left: 10px;
+}
+.sup-length {
+  background-color: #6c3428;
+  color: rgb(245, 245, 245);
+  font-size: 1rem;
+  border-radius: 5px;
+}
+.btn-logout-header {
+  width: 100%;
+}
+.link-header {
+  color: rgb(245, 245, 245) !important;
+  text-decoration: none !important;
+}
+#dropdown-menu-align-end {
+  color: #f5ebeb !important ;
+}
+header {
+  position: fixed;
+  top: 0px;
+  z-index: 2;
+  width: 100%;
+}
+#nav-header {
+  /* background-color: rgba(202, 4, 4, 0.929) !important; */
+  background: #e40046 !important;
+  height: 70px !important;
+}

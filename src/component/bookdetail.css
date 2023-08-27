@@ -1,0 +1,77 @@
+/* bookdetail.css */
+.bookdetails-card-componenet {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.product-image {
+  width: 350px;
+  margin-right: 20px;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+}
+
+.product-details {
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product-author {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.staric {
+  color: gold;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1976d2;
+  margin-bottom: 20px;
+}
+
+.product-buttons {
+  display: flex;
+}
+
+.Btn-Buy-shop-book-details {
+  margin-right: 10px;
+}
+.btn-shop-book-book-details {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.button-container {
+  display: flex;
+  gap: 8px;
+}
+.Btn-Buy-shop-book-details,
+.Btn-Buy-rent-book-details {
+  width: 120px;
+}
