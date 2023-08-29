@@ -8,6 +8,14 @@
   flex-direction: column;
   width: 35vw;
   border: 1px solid black;
+  background-color: #f2f2f2;
+
+  max-height: 400px;
+  overflow-y: auto;
+}
+.h2-cart-summart {
+  background-color: black;
+  color: rgb(186, 186, 186);
 }
 /* Divider styles */
 
@@ -23,9 +31,9 @@
   overflow-x: hidden;
 }
 
-.cart-item:nth-child(odd) {
+/* .cart-item:nth-child(odd) {
   background-color: #ccc;
-}
+} */
 
 .cart-item {
   min-width: 58vw;

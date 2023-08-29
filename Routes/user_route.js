@@ -21,6 +21,7 @@ userRouter.route("/create-user").post(async (req, res, next) => {
       education: req.body.education,
       Type: req.body.Type,
       RentedSub: req.body.RentedSub,
+      SellProduct: req.body.SellProduct,
     });
   } catch (err) {
     res.json({ status: "error", error: "Duplicate email" });
@@ -184,6 +185,28 @@ userRouter.route("/get-user/:id").get((req, res) => {
     //     console.log(userlog);
     //   }
   });
+});
+userRouter.route("/update-user-sell/:id").put(async (req, res, next) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await userSchema.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    user.SellProduct += 1;
+    const updatedUser = await user.save();
+
+    return res.json({
+      message: "User updated successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 });
 userRouter.route("/update-user/:id").put(async (req, res, next) => {
   const userId = req.params.id;

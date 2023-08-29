@@ -88,7 +88,7 @@ const CartDashboard = ({ carthistory }) => {
           )}
         </Container>
       </div>
-      <div>
+      <div className="chartdashcontainer">
         <BarChart
           className="rented-bargraph"
           width={600}

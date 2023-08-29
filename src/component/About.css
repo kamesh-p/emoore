@@ -82,7 +82,7 @@
 .Favarite-title {
   font-weight: bold !important;
   text-align: left !important;
-  margin: 50px 0px !important;
+  /* margin: 50px 0px !important; */
   color: black !important;
 }
 
@@ -505,4 +505,36 @@
   font-size: 16px;
 
   text-align: center;
+}
+/* scroll */
+.scroll-background {
+  justify-self: center;
+
+  display: grid;
+
+  flex-direction: row;
+
+  margin: 20px 0;
+
+  height: 100px;
+
+  background-color: #f2f2f2;
+
+  background-image: url("../component/Assert/MicrosoftTeams-image\ \(1\).png");
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  background-size: contain;
+}
+
+.scroll-background p {
+  font-size: 20px;
+
+  margin-bottom: 40px;
+
+  align-self: flex-end;
+
+  justify-self: center;
 }

@@ -75,10 +75,10 @@ const Shop = ({ books, handleAddToCartrent }) => {
     (book) => book.Genre === "fictional"
   );
   const NonFictionTotalBooks = GenreTotalBooks.filter(
-    (book) => book.genre === "Non-fictional"
+    (book) => book.Genre === "Non-fictional"
   );
   const ThrillerTotalBooks = GenreTotalBooks.filter(
-    (book) => book.genre === "Thriller"
+    (book) => book.Genre === "Thriller"
   );
   console.log("rryytt", NonFictionTotalBooks);
 

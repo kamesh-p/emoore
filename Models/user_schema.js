@@ -21,21 +21,22 @@ const userSchema = new mongoose.Schema(
     },
     language: {
       type: [],
-      // required: true,
     },
     genre: {
       type: [],
-      // required: true,
     },
     education: {
       type: String,
-      // required: true,
     },
     Type: {
       type: String,
     },
     RentedSub: {
       type: Boolean,
+    },
+
+    SellProduct: {
+      type: Number,
     },
   },
 

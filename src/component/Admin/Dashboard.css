@@ -1,16 +1,13 @@
 .container-drawer-dashboard {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  /* overflow: hidden; */
-  width: 10px;
 }
 .list-dashboard-container {
   margin-top: 70px !important;
 }
-.top-list-componenet {
+.top-list-component {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 20px;
 }
 .tab-container {
@@ -19,4 +16,15 @@
 .dashboard-content {
   flex-grow: 1;
   overflow: auto;
+}
+
+.topbookcontainer {
+  min-width: 300px !important;
+  min-height: 350px !important;
+  border: 1px solid black;
+  margin-top: 40px;
+  padding-top: 20px;
+  background: linear-gradient(to bottom, #c32da5, #673ab7);
+  color: white;
+  border-radius: 25px;
 }

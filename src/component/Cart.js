@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { toast } from "react-toastify";
 import Login from "./Login";
+import PaymentPage from "./Payment";
 
 const Cart = ({ cartItems, handleRemoveItem }) => {
   const [cart, setCart] = useState(cartItems);
@@ -43,12 +44,91 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
 
   const [detailed, setdetailedorder] = useState([]);
   const [email, setEmail] = useState("");
+  const [coupons, setcoupon] = useState([]);
+  const [selectedCoupon, setSelectedCoupon] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [addressError, setAddressError] = useState(false);
+  const [paymentTypeError, setPaymentTypeError] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
 
   const handlePlaceOrderClick = () => {
-    setDialogOpen(true);
+    if (cartItems.length === 0) {
+      toast.error("Your cart is empty", { position: "top-right" });
+    } else {
+      setDialogOpen(true);
+    }
   };
+  if (user) {
+    console.log("sellp", user.Users.SellProduct);
+  }
+  // console.log("coup", coupons);
+  const couponOffers = [
+    "get 5% off on books",
+    "get 5% off on kfc",
+    "get 5% off on Kooku Fm",
+  ];
+  const couponOffers1 = [
+    "get 10% off on books",
+    "get 10% off on kfc",
+    "get 10% off on Kooku Fm",
+  ];
+  const couponOffers2 = [
+    "get 15% off on books",
+    "get 15% off on kfc",
+    "get 15% off on Kooku Fm",
+  ];
+
+  function getRandomCoupons(count) {
+    const selectedCoupons = [];
+    while (selectedCoupons.length < count && couponOffers.length > 0) {
+      const randomIndex = Math.floor(Math.random() * couponOffers.length);
+      selectedCoupons.push(couponOffers[randomIndex]);
+      couponOffers.splice(randomIndex, 1);
+    }
+    return selectedCoupons;
+  }
+  // const sellProductCount = user?.Users?.SellProduct || 0;
+
+  let randomCoupons = [];
+
+  randomCoupons = getRandomCoupons(1);
+  console.log("rc", randomCoupons);
+
+  function getRandomCoupons1(count) {
+    const selectedCoupons1 = [];
+    while (selectedCoupons1.length < count && couponOffers1.length > 0) {
+      const randomIndex = Math.floor(Math.random() * couponOffers1.length);
+      selectedCoupons1.push(couponOffers1[randomIndex]);
+      couponOffers.splice(randomIndex, 1);
+    }
+    return selectedCoupons1;
+  }
+  // const sellProductCount = user?.Users?.SellProduct || 0;
+
+  let randomCoupons1 = [];
+
+  randomCoupons1 = getRandomCoupons1(1);
+  console.log("rc1", randomCoupons1);
+
+  function getRandomCoupons2(count) {
+    const selectedCoupons2 = [];
+    while (selectedCoupons2.length < count && couponOffers2.length > 0) {
+      const randomIndex = Math.floor(Math.random() * couponOffers2.length);
+      selectedCoupons2.push(couponOffers2[randomIndex]);
+      couponOffers2.splice(randomIndex, 1);
+    }
+    return selectedCoupons2;
+  }
+  // const sellProductCount = user?.Users?.SellProduct || 0;
+
+  let randomCoupons2 = [];
+
+  randomCoupons2 = getRandomCoupons2(1);
+  console.log("rc2", randomCoupons2);
+
+  // setcoupon(randomCoupons);
 
   const handleIncreaseQuantity = (index) => {
     const updatedCart = [...cartItems];
@@ -80,6 +160,16 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
 
     return totalPrice;
   };
+  const handleSelectedCouponChange = (coupon) => {
+    setSelectedCoupon(coupon);
+    localStorage.setItem("selectedCoupon", coupon);
+  };
+  useEffect(() => {
+    const storedCoupon = localStorage.getItem("selectedCoupon");
+    if (storedCoupon) {
+      setSelectedCoupon(storedCoupon);
+    }
+  }, []);
   const currentDate = new Date();
 
   const HandleConfirmationbutton = async () => {
@@ -150,10 +240,24 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
   };
 
   const HandleopenConfirmation = () => {
-    setConfirmation(true);
-    setCart([]);
-  };
+    // Validate input fields
+    if (!name || !email || !address || !paymentType) {
+      // Update the corresponding error states to true if fields are empty
+      setNameError(!name);
+      setEmailError(!email);
+      setAddressError(!address);
+      setPaymentTypeError(!paymentType);
 
+      // Show Toastify message for incomplete form
+      toast.error("Please fill in all required fields", {
+        position: "top-right",
+      });
+    } else {
+      // All fields are filled, open the confirmation dialog
+      setConfirmation(true);
+      setCart([]); // Not sure if you want to clear the cart here or not
+    }
+  };
   const handleCloseDialog = () => {
     setDialogOpen(false);
   };
@@ -173,12 +277,14 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
   const handleLogin = () => {
     <Login />;
   };
-
-  // console.log("order", orders);
+  // const handlediscount = () => {};
+  // const coupon = randomCoupons.forEach();
+  // // console.log("order", orders);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   console.log("cart", isAuthenticated);
+  console.log("user", user);
 
   return (
     <div className="cart-container">
@@ -222,46 +328,159 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
           </div>
         ))}
       </div>
-      <div className="cart-summary">
-        <h2>Cart Summary</h2>
-        <div>
-          {cartItems.map((item) => (
-            <div key={item.id} className="summary-tile">
-              <div className="">{item.title}</div>
-              <div> {item.price}</div>
-            </div>
-          ))}
-        </div>
-        <div className="cart-total">
-          <p>Subtotal: {getTotalCartPrice()}</p>
-          <p>Tax: {calculateTax()}</p>
-          <p>Total: {calculateTotal()}</p>
-        </div>
 
-        {isAuthenticated ? (
-          <Button
-            className="Cart-price-orde-btn"
-            variant="contained"
-            color="success"
-            size="small"
-            onClick={handlePlaceOrderClick}
-          >
-            Place order
-          </Button>
-        ) : (
-          <Link to="/login">
+      {isAuthenticated ? (
+        <div>
+          <div className="cart-summary">
+            <h2 className="h2-cart-summart">Cart Summary</h2>
+            <div>
+              {cartItems.map((item) => (
+                <div key={item.id} className="summary-tile">
+                  <div className="">{item.title}</div>
+                </div>
+              ))}
+            </div>
+            <div className="cart-total">
+              <p>Subtotal: {getTotalCartPrice()}</p>
+              {user?.Users?.SellProduct > 10 &&
+                user?.Users?.SellProduct <= 20 &&
+                coupons && (
+                  <div className="random-coupon">
+                    <h3>Random Coupon Offer:</h3>
+                    {randomCoupons.map((coupon, index) => {
+                      const couponParts = coupon.split(" "); // Split the coupon text by spaces
+                      const percentageValue = parseFloat(couponParts[1]);
+                      const total = calculateTotal();
+                      const discountedTotal =
+                        total - (total * percentageValue) / 100; // Extract the percentage value
+
+                      if (
+                        !isNaN(percentageValue) &&
+                        coupon.toLowerCase().includes("book")
+                      ) {
+                        return (
+                          <div>
+                            <p key={index}>
+                              Coupon: {coupon}
+                              <br />
+                              Percentage Value: {percentageValue}%
+                            </p>
+                            <p>Discount total:{discountedTotal}</p>
+                          </div>
+                        );
+                      }
+                      return <p>{randomCoupons[0]}</p>;
+                    })}
+                  </div>
+                )}
+
+              {user?.Users?.SellProduct > 20 &&
+                user?.Users?.SellProduct <= 30 &&
+                coupons && (
+                  <div className="random-coupon">
+                    <h3>Random Coupon Offer:</h3>
+                    {randomCoupons1.map((coupon, index) => {
+                      const couponParts = coupon.split(" "); // Split the coupon text by spaces
+                      const percentageValue = parseFloat(couponParts[1]);
+                      const total = calculateTotal();
+                      const discountedTotal =
+                        total - (total * percentageValue) / 100; // Extract the percentage value
+
+                      if (
+                        !isNaN(percentageValue) &&
+                        coupon.toLowerCase().includes("book")
+                      ) {
+                        return (
+                          <div>
+                            <p key={index}>
+                              Coupon: {coupon}
+                              <br />
+                              Percentage Value: {percentageValue}%
+                            </p>
+                            <p>Discount total:{discountedTotal}</p>
+                          </div>
+                        );
+                      }
+                      return <p>{randomCoupons1[0]}</p>;
+                    })}
+                  </div>
+                )}
+              {user?.Users?.SellProduct > 30 && coupons && (
+                <div className="random-coupon">
+                  <h3>Random Coupon Offer:</h3>
+                  {randomCoupons2.map((coupon, index) => {
+                    const couponParts = coupon.split(" "); // Split the coupon text by spaces
+                    const percentageValue = parseFloat(couponParts[1]);
+                    const total = calculateTotal();
+                    const discountedTotal =
+                      total - (total * percentageValue) / 100; // Extract the percentage value
+
+                    if (
+                      !isNaN(percentageValue) &&
+                      coupon.toLowerCase().includes("book")
+                    ) {
+                      return (
+                        <div>
+                          <p key={index}>
+                            Coupon: {coupon}
+                            <br />
+                            Percentage Value: {percentageValue}%
+                          </p>
+                          <p>Discount total:{discountedTotal}</p>
+                        </div>
+                      );
+                    }
+                    return <p>{randomCoupons2[0]}</p>;
+                  })}
+                </div>
+              )}
+
+              <p>Tax: {calculateTax()}</p>
+
+              <p>Total: {calculateTotal()}</p>
+            </div>
+
             <Button
               className="Cart-price-orde-btn"
               variant="contained"
-              color="error"
-              size="medium"
-              type="submit"
+              color="success"
+              size="small"
+              onClick={handlePlaceOrderClick}
             >
-              Login
+              Place order
             </Button>
-          </Link>
-        )}
-      </div>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="cart-summary">
+            <h2 className="h2-cart-summart">Cart Summary</h2>
+            <div>
+              {cartItems.map((item) => (
+                <div key={item.id} className="summary-tile">
+                  <div className="">{item.title}</div>
+                </div>
+              ))}
+            </div>
+            <div className="cart-total">
+              <p>Subtotal: {getTotalCartPrice()}</p>
+              <p>Tax: {calculateTax()}</p>
+              <p>Total: {calculateTotal()}</p>
+            </div>
+            <Link to="/login">
+              <Button
+                className="Cart-price-orde-btn"
+                variant="contained"
+                color="error"
+                size="medium"
+                type="submit"
+              >
+                Login
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
 
       {dialogOpen && isAuthenticated && (
         <Dialog open={dialogOpen} onClose={handleCloseDialog}>
@@ -282,9 +501,13 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
               label="Name"
               type="name"
               fullWidth
-              onChange={(e) => setName(e.target.value)}
+              error={nameError}
+              helperText={nameError ? "Name is required" : ""}
+              onChange={(e) => {
+                setName(e.target.value);
+                setNameError(false); // Clear the error when user types
+              }}
             />
-
             <TextField
               autoFocus
               margin="dense"
@@ -292,18 +515,27 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
               label="Email"
               type="email"
               fullWidth
-              onChange={(e) => setEmail(e.target.value)}
+              error={emailError}
+              helperText={emailError ? "Email is required" : ""}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailError(false); // Clear the error when user types
+              }}
             />
-
             <TextField
               autoFocus
               margin="dense"
-              id="name"
+              id="address"
               label="Address"
               type="Address"
               multiline
               fullWidth
-              onChange={(e) => setAddress(e.target.value)}
+              error={addressError}
+              helperText={addressError ? "Address is required" : ""}
+              onChange={(e) => {
+                setAddress(e.target.value);
+                setAddressError(false); // Clear the error when user types
+              }}
             />
 
             <div className="cart-container-Cart">
@@ -330,7 +562,11 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
               className="radio-list"
               name="paymentType"
               value={paymentType}
-              onChange={(e) => setPaymentType(e.target.value)}
+              onChange={(e) => {
+                setPaymentType(e.target.value);
+                setPaymentTypeError(false); // Clear the error when user selects
+              }}
+              error={paymentTypeError}
             >
               <br />
 
@@ -342,9 +578,9 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
                 />
 
                 <FormControlLabel
-                  value="paypal"
+                  value="debitCard"
                   control={<Radio />}
-                  label="PayPal"
+                  label="debitCard"
                 />
 
                 <FormControlLabel
@@ -354,6 +590,9 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
                 />
               </Grid>
             </RadioGroup>
+            {paymentType === "creditCard" || paymentType === "debitCard" ? (
+              <PaymentPage />
+            ) : null}
 
             <br />
 
@@ -407,42 +646,11 @@ const Cart = ({ cartItems, handleRemoveItem }) => {
           </DialogActions>
         </Dialog>
       )}
+      {/* {paymentType === "creditCard" || paymentType === "debitCard" ? (
+        <PaymentPage />
+      ) : null} */}
     </div>
   );
 };
 
 export default Cart;
-{
-  /*
-
-<div className="cart-item" key={index}>
-            <div>
-              <img src={item.imagelink} alt={item.title}></img>
-            </div>
-
-            {item.title}
-            <div>
-             <IconButton
-              aria-label="Decrease Quantity"
-              onClick={() => handleDecreaseQuantity(index)}
-              color="error"
-            >
-              <RemoveIcon />
-            </IconButton> 
-            </div>
-            
-
-            <span>{item.quantity}</span>
-
-            <IconButton
-              aria-label="Increase Quantity"
-              onClick={() => handleIncreaseQuantity(index)}
-              color="success"
-            >
-              <AddIcon />
-            </IconButton>
-
-            <span>₹{getTotalPrice(item)}</span>
-          </div>
-          .slice(0, item.title.indexOf(":"))*/
-}

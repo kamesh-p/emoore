@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Library.css";
 
@@ -83,6 +83,7 @@ const Library = ({ rentedBooks, onDeleteBook }) => {
 
   const handleSubscribe = () => {
     const isValid = validatePaymentDetails();
+    setSubscribeDialogOpen(false);
 
     if (isValid) {
       // Handle subscription logic here

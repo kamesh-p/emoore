@@ -30,7 +30,10 @@ import Adminuser from "./component/Admin/Adminuser";
 // Adjust the path
 function App() {
   const dispatch = useDispatch();
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    return storedCartItems;
+  });
 
   const [books, setBooks] = useState([]);
   const [booksState, setBooksState] = useState([]);
@@ -64,7 +67,7 @@ function App() {
 
   const addToCart = (book) => {
     const existingCartItemIndex = cartItems.findIndex(
-      (item) => item.id === book.id
+      (item) => item._id === book._id
     );
 
     if (existingCartItemIndex !== -1) {
@@ -95,6 +98,15 @@ function App() {
     updatedCart.splice(index, 1);
     setCartItems(updatedCart);
   };
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(storedCartItems);
+  }, []);
+
+  // Save cart items to localStorage whenever cartItems changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
   const handleDeleteBook = (bookId) => {
     toast.error("Item removed from cart...", {
       autoClose: 1000,

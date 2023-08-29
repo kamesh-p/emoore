@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useSelector } from "react-redux";
+import { Send as SendIcon } from "@mui/icons-material";
 import {
   Typography,
   Paper,
@@ -9,6 +10,11 @@ import {
   CardContent,
   CardMedia,
   Button,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+  Divider,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
@@ -36,6 +42,25 @@ const BookDetailsPage = ({ books, handleAddToCartrent }) => {
   // console.log("carttbook details", cartItems);
   const { bookId } = useParams();
   const book = books.find((book) => book._id === bookId);
+  const [comments, setComments] = useState([
+    { id: 1, text: "This book is amazing!" },
+    { id: 2, text: "I really enjoyed reading it." },
+  ]);
+  const [newComment, setNewComment] = useState("");
+
+  // Function to handle comment submission
+  const handleCommentSubmit = () => {
+    if (newComment.trim() !== "") {
+      // Create a new comment object with a unique id
+      const comment = { id: comments.length + 1, text: newComment };
+
+      // Add the new comment to the comments list
+      setComments([...comments, comment]);
+
+      // Clear the input field
+      setNewComment("");
+    }
+  };
 
   if (!bookId) {
     return <div>Book ID not provided.</div>;
@@ -114,7 +139,39 @@ const BookDetailsPage = ({ books, handleAddToCartrent }) => {
                 ))}
                 {hasHalfStar && <StarHalfIcon className="staric" />}
               </div>
+              <div>
+                <h3>Comments</h3>
+                <List>
+                  {comments.map((comment) => (
+                    <React.Fragment key={comment.id}>
+                      <ListItem>
+                        <ListItemText primary={comment.text} />
+                      </ListItem>
+                      <Divider />
+                    </React.Fragment>
+                  ))}
+                </List>
 
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <TextField
+                    label="Write a comment"
+                    variant="outlined"
+                    fullWidth
+                    multiline
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    style={{ marginRight: "10px" }}
+                  />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    endIcon={<SendIcon />}
+                    onClick={handleCommentSubmit}
+                  >
+                    Send
+                  </Button>
+                </div>
+              </div>
               <div className="product-price">
                 <Typography variant="h5" color="error">
                   Rs: {book.price}
@@ -128,7 +185,7 @@ const BookDetailsPage = ({ books, handleAddToCartrent }) => {
                   className="Btn-Buy-shop-book-details"
                   onClick={() => handleAddToCartrent(book)}
                 >
-                  Buy
+                  Add Cart
                 </Button>
 
                 <Button

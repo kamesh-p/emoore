@@ -21,7 +21,7 @@ const SellDetails = () => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.books.books);
   const [deletedBooks, setDeletedBooks] = useState([]);
-
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(fetchBooks());
   }, [dispatch]);
@@ -39,7 +39,17 @@ const SellDetails = () => {
   };
 
   const handleConfirm = async (book) => {
+    const userId = book.user.Users._id;
+    console.log("userid", userId);
     try {
+      axios
+        .put(`http://localhost:4000/users/update-user-sell/${userId}`)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       const response = await axios.post(
         "http://localhost:4000/books/create-user",
         book
@@ -53,7 +63,7 @@ const SellDetails = () => {
       console.error("Error posting book:", error);
     }
   };
-
+  console.log("db", books);
   return (
     <div className="selldetails-full-container">
       <Container maxWidth="lg" className="container-selldetails-box">

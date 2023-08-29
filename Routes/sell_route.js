@@ -6,18 +6,92 @@ let mongoose = require("mongoose"),
 
 let sellingSchema = require("../Models/sell_schema");
 
+const nodemailer = require("nodemailer");
+
+const Mailgen = require("mailgen");
+
+const { EMAIL, PASSWORD } = require("../env");
+
 // // CREATE selling
 
-sellRouter.route("/create-user").post((req, res, next) => {
-  sellingSchema.create(req.body, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      console.log(data);
+sellRouter.route("/create-user").post(async (req, res, next) => {
+  try {
+    const sellData = req.body;
 
-      res.json(data);
-    }
-  });
+    const data = await sellingSchema.create(sellData);
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+
+      auth: {
+        user: EMAIL,
+
+        pass: PASSWORD, //this is gmail app specific password
+      },
+    });
+
+    let MailGenerator = new Mailgen({
+      theme: "default",
+
+      product: {
+        name: "E-Moore Order",
+
+        link: "https://mailgen.js/",
+      },
+    });
+
+    let response = {
+      body: {
+        name: sellData.user.Users.name,
+
+        intro: "Selling book details!",
+
+        table: {
+          data: {
+            author: sellData.author,
+
+            book: sellData.title,
+
+            description: sellData.description,
+
+            classification: sellData.classification,
+
+            Education: sellData.education,
+
+            Genre: sellData.Genre,
+
+            language: sellData.langage,
+
+            price: `Rs ${sellData.price}`,
+          },
+        },
+
+        outro: "You will notified on your book status..",
+      },
+    };
+
+    let mail = MailGenerator.generate(response);
+
+    let message = {
+      from: EMAIL,
+
+      to: sellData.user.Users.email,
+
+      subject: "Sell Details",
+
+      html: mail,
+    };
+
+    transporter.sendMail(message);
+
+    console.log(data);
+
+    res.json(data);
+  } catch (error) {
+    console.error("Error placing order:", error);
+
+    res.status(500).json({ error: "Error placing order" });
+  }
 });
 
 // READ sellings

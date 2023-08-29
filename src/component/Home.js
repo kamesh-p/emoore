@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import "./Home.css";
 import { Typography, List, ListItem, ListItemText } from "@mui/material";
 
@@ -19,6 +19,7 @@ const HomePage = () => {
     carthistory.forEach((order) => {
       order.items.forEach((item) => {
         const title = item.title;
+        const id = item._id;
 
         if (title in bookTitleFrequency) {
           bookTitleFrequency[title]++;
@@ -32,14 +33,23 @@ const HomePage = () => {
       (a, b) => bookTitleFrequency[b] - bookTitleFrequency[a]
     );
 
-    const topOrderedBooks = sortedBookTitles.slice(0, 5);
+    const topOrderedBooks = sortedBookTitles.slice(0, 5).map((title) => {
+      const matchingItem = carthistory.find((order) =>
+        order.items.some((item) => item.title === title)
+      );
+      return {
+        id: matchingItem.items.find((item) => item.title === title)._id,
+        title: title,
+      };
+    });
+
     setTopOrderedBooks(topOrderedBooks);
   }, [carthistory]);
   console.log("topbook", OrderedBooks);
   return (
     <div className="homepage">
       <div className="category-container">
-        <a>
+        <Link className="link-shop-comp-contanin" to="/Buy">
           <div className="category">
             <div className="categoryInner">
               <img
@@ -50,22 +60,22 @@ const HomePage = () => {
               <p className="category-text">Fiction</p>
             </div>
           </div>
-        </a>
+        </Link>
+        <Link className="link-shop-comp-contanin" to="/Buy">
+          <a>
+            <div className="category">
+              <div className="categoryInner">
+                <img
+                  src="https://n2.sdlcdn.com/imgs/e/h/m/NonFiction-3fef2.jpg"
+                  alt="Fiction"
+                ></img>
 
-        <a>
-          <div className="category">
-            <div className="categoryInner">
-              <img
-                src="https://n2.sdlcdn.com/imgs/e/h/m/NonFiction-3fef2.jpg"
-                alt="Fiction"
-              ></img>
-
-              <p className="category-text">Non-Fiction</p>
+                <p className="category-text">Non-Fiction</p>
+              </div>
             </div>
-          </div>
-        </a>
-
-        <a>
+          </a>
+        </Link>
+        <Link className="link-shop-comp-contanin" to="/Buy">
           <div className="category">
             <div className="categoryInner">
               <img
@@ -76,9 +86,9 @@ const HomePage = () => {
               <p className="category-text">Education</p>
             </div>
           </div>
-        </a>
+        </Link>
 
-        <a>
+        <Link className="link-shop-comp-contanin" to="/Buy">
           <div className="category">
             <div className="categoryInner">
               <img
@@ -89,21 +99,21 @@ const HomePage = () => {
               <p className="category-text">Engineering</p>
             </div>
           </div>
-        </a>
+        </Link>
+        <Link className="link-shop-comp-contanin" to="/Buy">
+          <a>
+            <div className="category">
+              <div className="categoryInner">
+                <img
+                  src="https://n3.sdlcdn.com/imgs/e/h/m/children-7d2df.jpg"
+                  alt="Fiction"
+                ></img>
 
-        <a>
-          <div className="category">
-            <div className="categoryInner">
-              <img
-                src="https://n3.sdlcdn.com/imgs/e/h/m/children-7d2df.jpg"
-                alt="Fiction"
-              ></img>
-
-              <p className="category-text">Medical</p>
+                <p className="category-text">Medical</p>
+              </div>
             </div>
-          </div>
-        </a>
-
+          </a>
+        </Link>
         <a>
           <div className="category">
             <div className="categoryInner">
@@ -147,16 +157,22 @@ const HomePage = () => {
       <div className="carousel-container">
         <div className="trending-section">
           <Typography variant="h6">Top Five Ordered Books</Typography>
+
           <List>
-            {OrderedBooks.map((bookTitle, index) => (
+            {OrderedBooks.map((book, index) => (
               <ListItem key={index}>
-                <ListItemText
-                  primary={
-                    bookTitle.length > 20
-                      ? `${bookTitle.slice(0, 17)}...`
-                      : bookTitle
-                  }
-                />
+                <Link
+                  className="link-shop-comp-contan"
+                  to={{ pathname: `/book/${book.id}`, state: { book } }}
+                >
+                  <ListItemText
+                    primary={
+                      book.title.length > 20
+                        ? `${book.title.slice(0, 17)}...`
+                        : book.title
+                    }
+                  />
+                </Link>
               </ListItem>
             ))}
           </List>

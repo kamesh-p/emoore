@@ -117,18 +117,36 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
     (book) => book.classification === "Education"
   );
   const EducationsortedBooks = EducationTotalBooks.sort((a, b) => {
-    const ratingA = parseFloat(a.Rating["$numberDecimal"]);
-    const ratingB = parseFloat(b.Rating["$numberDecimal"]);
+    const ratingA =
+      a.Rating && a.Rating["$numberDecimal"]
+        ? parseFloat(a.Rating["$numberDecimal"])
+        : 0;
+    const ratingB =
+      b.Rating && b.Rating["$numberDecimal"]
+        ? parseFloat(b.Rating["$numberDecimal"])
+        : 0;
     return ratingB - ratingA;
   });
   const GenresortedBooks = GenreTotalBooks.sort((a, b) => {
-    const ratingA = parseFloat(a.Rating["$numberDecimal"]);
-    const ratingB = parseFloat(b.Rating["$numberDecimal"]);
+    const ratingA =
+      a.Rating && a.Rating["$numberDecimal"]
+        ? parseFloat(a.Rating["$numberDecimal"])
+        : 0;
+    const ratingB =
+      b.Rating && b.Rating["$numberDecimal"]
+        ? parseFloat(b.Rating["$numberDecimal"])
+        : 0;
     return ratingB - ratingA;
   });
   const LangsortedBooks = LanguageTotalBooks.sort((a, b) => {
-    const ratingA = parseFloat(a.Rating["$numberDecimal"]);
-    const ratingB = parseFloat(b.Rating["$numberDecimal"]);
+    const ratingA =
+      a.Rating && a.Rating["$numberDecimal"]
+        ? parseFloat(a.Rating["$numberDecimal"])
+        : 0;
+    const ratingB =
+      b.Rating && b.Rating["$numberDecimal"]
+        ? parseFloat(b.Rating["$numberDecimal"])
+        : 0;
     return ratingB - ratingA;
   });
   const topratedEducation = EducationsortedBooks.slice(0, 4);
@@ -152,12 +170,17 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
           book.language === matchingPreference.language[0]
       )
     : [];
-
   const languageBooks = matchingPreference
     ? LangsortedBooks.filter(
         (book) => book.language === matchingPreference.language[0]
       )
     : [];
+  const toppreferenecelanguage = languageBooks.slice(0, 4);
+  console.log("topppppppppplllll", toppreferenecelanguage);
+  const toppreferenecegenre = genreBooks.slice(0, 4);
+  console.log("toppppppppppggggg", toppreferenecegenre);
+  const topprefereneceEducation = educationBooks.slice(0, 4);
+  console.log("toppppppppppeeeee", topprefereneceEducation);
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
@@ -399,13 +422,11 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
           matchingPreference &&
           matchingPreference.education === "" && (
             <>
-              <Typography
-                variant="h5"
-                component="h6"
-                className="Favarite-title"
-              >
-                {Loginname} Education Preference Books
-              </Typography>
+              <div className="scroll-background">
+                <p variant="h5" component="h6" className="Favarite-title">
+                  Top Rated Education
+                </p>
+              </div>
               <div className="Cart-book-shop-search">
                 {topratedEducation.map((book, index) => (
                   <Link
@@ -461,13 +482,11 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
           matchingPreference &&
           matchingPreference.genre[0] === "" && (
             <>
-              <Typography
-                variant="h5"
-                component="h6"
-                className="Favarite-title"
-              >
-                {Loginname} Genre Preference Books
-              </Typography>
+              <div className="scroll-background">
+                <p variant="h5" component="h6" className="Favarite-title">
+                  Top Rated Genre
+                </p>
+              </div>
               <div className="Cart-book-shop-search">
                 {topratedgenre.map((book, index) => (
                   <Link
@@ -523,13 +542,11 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
           matchingPreference &&
           matchingPreference.language[0] === "" && (
             <>
-              <Typography
-                variant="h5"
-                component="h6"
-                className="Favarite-title"
-              >
-                {Loginname} languge Preference Books
-              </Typography>
+              <div className="scroll-background">
+                <p variant="h5" component="h6" className="Favarite-title">
+                  Top Rated Language
+                </p>
+              </div>
               <div className="Cart-book-shop-search">
                 {topratedLang.map((book, index) => (
                   <Link
@@ -581,13 +598,15 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
               </div>
             </>
           )}
-        {!isAdmin && isAuthenticated && (
+        {!isAdmin && isAuthenticated && toppreferenecelanguage.length > 0 && (
           <>
-            <Typography variant="h5" component="h6" className="Favarite-title">
-              {Loginname} Language Perference Books
-            </Typography>
+            <div className="scroll-background">
+              <p variant="h5" component="h6" className="Favarite-title">
+                Your Language preference
+              </p>
+            </div>
             <div className="Cart-book-shop-search">
-              {languageBooks.map((book, index) => (
+              {toppreferenecelanguage.map((book, index) => (
                 <Link
                   className="link-shop-comp-contanin"
                   to={{ pathname: `/book/${book._id}`, state: { book } }}
@@ -639,9 +658,11 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
         )}
         {!isAuthenticated && !user && (
           <>
-            <Typography variant="h5" component="h6" className="Favarite-title">
-              {Loginname} Language Perference Books
-            </Typography>
+            <div className="scroll-background">
+              <p variant="h5" component="h6" className="Favarite-title">
+                Top Rated Language
+              </p>
+            </div>
             <div className="Cart-book-shop-search">
               {topratedLang.map((book, index) => (
                 <Link
@@ -695,9 +716,11 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
         )}
         {!isAuthenticated && !user && (
           <>
-            <Typography variant="h5" component="h6" className="Favarite-title">
-              {Loginname} Genre Perference Books
-            </Typography>
+            <div className="scroll-background">
+              <p variant="h5" component="h6" className="Favarite-title">
+                Top Rated Genre
+              </p>
+            </div>
             <div className="Cart-book-shop-search">
               {topratedgenre.map((book, index) => (
                 <Link
@@ -751,9 +774,11 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
         )}
         {!isAuthenticated && !user && (
           <>
-            <Typography variant="h5" component="h6" className="Favarite-title">
-              {Loginname} Perference Books
-            </Typography>
+            <div className="scroll-background">
+              <p variant="h5" component="h6" className="Favarite-title">
+                Top Rated Education
+              </p>
+            </div>
             <div className="Cart-book-shop-search">
               {topratedEducation.map((book, index) => (
                 <Link
@@ -805,13 +830,15 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
             </div>
           </>
         )}
-        {isAuthenticated && !isAdmin && (
+        {isAuthenticated && toppreferenecegenre.length > 0 && !isAdmin && (
           <>
-            <Typography variant="h5" component="h6" className="Favarite-title">
-              {Loginname} Genre Perference Books
-            </Typography>
+            <div className="scroll-background">
+              <p variant="h5" component="h6" className="Favarite-title">
+                Your Genre Book
+              </p>
+            </div>
             <div className="Cart-book-shop-search">
-              {genreBooks.map((book, index) => (
+              {toppreferenecegenre.map((book, index) => (
                 <Link
                   className="link-shop-comp-contanin"
                   to={{ pathname: `/book/${book._id}`, state: { book } }}
@@ -863,13 +890,15 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
           </>
         )}
 
-        {isAuthenticated && !isAdmin && (
+        {isAuthenticated && topprefereneceEducation.length > 0 && !isAdmin && (
           <>
-            <Typography variant="h5" component="h6" className="Favarite-title">
-              {Loginname} Education Perference Books
-            </Typography>
+            <div className="scroll-background">
+              <p variant="h5" component="h6" className="Favarite-title">
+                Your Education preference
+              </p>
+            </div>
             <div className="Cart-book-shop-search">
-              {educationBooks.map((book, index) => (
+              {topprefereneceEducation.map((book, index) => (
                 <Link
                   className="link-shop-comp-contanin"
                   to={{ pathname: `/book/${book._id}`, state: { book } }}
@@ -920,7 +949,7 @@ const About = ({ addToCart, cartItems, books, handleAddToCartrent }) => {
           </>
         )}
       </div>
-      {/* <Footer /> */}
+      {!isAdmin && <Footer />}
     </div>
   );
 };

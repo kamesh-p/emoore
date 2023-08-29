@@ -110,88 +110,99 @@ const Dashboard = () => {
 
   return (
     <div className="container-drawer-dashboard">
-      <div className="top-list-componenet">
-        <div>
-          <Container
-            sx={{
-              width: 240,
-              border: "1px solid black",
-              padding: "16px",
-              margin: "50px 140px 50px 65px",
-              background: "linear-gradient(to bottom, #757575, #212121)",
-              color: "white",
-              borderRadius: "25px",
-            }}
-          >
-            <Typography variant="h6">Top Five Authors books</Typography>
-            <List>
-              {topAuthors.map((author, index) => (
-                <ListItem key={index}>
-                  <ListItemText
-                    primary={
-                      author.length > 20 ? `${author.slice(0, 17)}...` : author
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Container>
+      <div className="top-list-component">
+        {/* <div className="topbookcontainer">
+          <Typography variant="h6">Top Five Authors books</Typography>
+          <List>
+            {topAuthors.map((author, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={
+                    author.length > 20 ? `${author.slice(0, 17)}...` : author
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div> */}
+        {/* <div className="topbookcontainer">
+          <Typography variant="h6">Top Five Ordered Books</Typography>
+          <List>
+            {topOrderedBooks.map((bookTitle, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={
+                    bookTitle.length > 20
+                      ? `${bookTitle.slice(0, 17)}...`
+                      : bookTitle
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div> */}
+        {/* <div className="topbookcontainer">
+          <Typography variant="h6">Top Five Rented Books</Typography>
+          <List>
+            {topRentedBooks.map((bookTitle, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={
+                    bookTitle.length > 20
+                      ? `${bookTitle.slice(0, 17)}...`
+                      : bookTitle
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div> */}
+
+        <div className="topbookcontainer">
+          <Typography variant="h6">Top Five Authors books</Typography>
+          <List>
+            {topAuthors.map((author, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={
+                    author.length > 20 ? `${author.slice(0, 17)}...` : author
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
         </div>
-        <div>
-          <Container
-            sx={{
-              width: 240,
-              border: "1px solid black",
-              padding: "16px",
-              margin: "50px 140px 50px 65px",
-              background: "linear-gradient(to bottom, #9c27b0, #673ab7)",
-              color: "white",
-              borderRadius: "25px",
-            }}
-          >
-            <Typography variant="h6">Top Five Ordered Books</Typography>
-            <List>
-              {topOrderedBooks.map((bookTitle, index) => (
-                <ListItem key={index}>
-                  <ListItemText
-                    primary={
-                      bookTitle.length > 20
-                        ? `${bookTitle.slice(0, 17)}...`
-                        : bookTitle
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Container>
+        <div className="topbookcontainer">
+          <Typography variant="h6">Top Five Ordered Books</Typography>
+          <List>
+            {topOrderedBooks.map((bookTitle, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={
+                    bookTitle.length > 20
+                      ? `${bookTitle.slice(0, 17)}...`
+                      : bookTitle
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
         </div>
-        <div>
-          <Container
-            sx={{
-              width: 240,
-              border: "1px solid black",
-              padding: "16px",
-              margin: "50px 140px 50px 65px",
-              color: "white",
-              borderRadius: "25px",
-              background: "linear-gradient(to bottom, #2196f3, #03a9f4)",
-            }}
-          >
-            <Typography variant="h6">Top Five Rented Books</Typography>
-            <List>
-              {topRentedBooks.map((bookTitle, index) => (
-                <ListItem key={index}>
-                  <ListItemText
-                    primary={
-                      bookTitle.length > 20
-                        ? `${bookTitle.slice(0, 17)}...`
-                        : bookTitle
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Container>
+        <div className="topbookcontainer">
+          <Typography variant="h6">Top Five Rented Books</Typography>
+          <List>
+            {topRentedBooks.map((bookTitle, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={
+                    bookTitle.length > 20
+                      ? `${bookTitle.slice(0, 17)}...`
+                      : bookTitle
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
         </div>
       </div>
       <div>
